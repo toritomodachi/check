@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./img/logo.ico" rel="shortcut icon" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./script/jquery-3.6.4.js"></script>
+    <script src="./script/jquery-migrate-3.4.1.js"></script>
+    <link href="./css/style.css" rel="stylesheet">
+    <script src="./script/script.js"></script>
+    
+    <title>출석체크</title>
+</head>
+<body>
+    <header>
+        <img class="logo" src="./img/logo2.png">
+    </header>
+    <div class="container">
+        <section>
+            <div>
+            <button id="myBtn">
+            출석 하고 싶음 ?
+            </button>
+        </div>
+
+    <div id="myModal" class="modal">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2>나는 출석할 것이다.
+            I'll be present.</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-div">
+        <label>학번</label>
+        <input type="number" placeholder="다른거 입력하면 죽음" class="form-control">
+      </div>
+      <div class="modal-div">
+        <label>개인인증코드</label>
+        <input type="number" placeholder="다른거 입력하면 죽음" class="form-control">
+      </div>
+      <button type="submit" class="black" id="server-Submit">Submit</button>
+      </div>
+    </div>
+  <script>
+var modal = document.getElementById("myModal");
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+  </script>
+  </div>
+        <div>
+            <button>
+                돌아가기
+            </button>
+        </div>
+        </section>
+    </div>
+</body>
+</html>
