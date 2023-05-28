@@ -4,8 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="./img/logo.ico" rel="shortcut icon" type="image/x-icon">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <title>Document</title>
+  <title>출석페이지</title>
+  <style>
+    header{
+      width: 100%;
+    height: 100px;
+    z-index: 4;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    margin-top: 0;
+    opacity: 1;
+    background-color: black;
+    }
+    .logo{
+      width: 100px;
+    height: 100px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    }
+  </style>
 </head>
 <body>
   
@@ -16,7 +38,7 @@
   <h4 class="container mt-4"><strong>나는 출석할 것이다.I'll be present.</strong></h4>
 
   <div class="container mt-3">
-    <form>
+    <form action="/check" method="POST">
       <div class="form-group">
         <label>학번</label>
         <input type="text" class="form-control">

@@ -18,10 +18,6 @@ app.use(session({secret : '비밀코드', resave : true, saveUninitialized: fals
 app.use(passport.initialize());
 app.use(passport.session()); 
 
-app.get('/login', function(요청, 응답){
-  응답.render('login.ejs')
-});
-
 app.post('/login', function(요청, 응답){
   응답.redirect('/')
 });
@@ -49,37 +45,3 @@ passport.use(new LocalStrategy({
     }
   })
 }));
-
-passport.serializeUser(function (user, done) {
-  done(null, user.id)
-});
-
-passport.deserializeUser(function (아이디, done) {
-  db.collection('login').findOne({ id: 아이디 }, function (에러, 결과) {
-    done(null, 결과)
-  })
-}); 
-
-app.get('/mypage', function (요청, 응답) {
-  응답.render('mypage.ejs', {})
-}) 
-
-
-app.get('/mypage', 로그인했니, function (요청, 응답) { 
-  console.log(요청.user); 
-  응답.render('mypage.ejs', {}) 
-}) 
-
-function 로그인했니(요청, 응답, next) { 
-  if (요청.user) { 
-    next() 
-  } 
-  else { 
-    응답.send('로그인안하셨는데요?') 
-  } 
-} 
-
-app.get('/mypage', 로그인했니, function (요청, 응답) {
-  console.log(요청.user);
-  응답.render('mypage.ejs', { 사용자: 요청.user })
-})  
