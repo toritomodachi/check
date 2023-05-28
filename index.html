@@ -36,7 +36,7 @@
       <div class="modal-body">
         <div class="modal-div">
         <label>학번</label>
-        <input type="number" placeholder="다른거 입력하면 죽음" class="form-control">
+        <input type="number" placeholder="다른거 입력하면 죽음"class="form-control">
       </div>
       <div class="modal-div">
         <label>개인인증코드</label>
@@ -45,33 +45,8 @@
       <button type="submit" class="black" id="server-Submit">Submit</button>
       </div>
     </div>
-  <script>
-var modal = document.getElementById("myModal");
-
-var btn = document.getElementById("myBtn");
-
-var span = document.getElementsByClassName("close")[0];
-
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-  </script>
+  <script src="./script/modal.js"></script>
   </div>
-        <div>
-            <button>
-                돌아가기
-            </button>
-        </div>
         </section>
     </div>
 </body>
