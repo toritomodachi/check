@@ -29,9 +29,13 @@ app.get('/check', function(요청, 응답) {
   응답.sendFile(__dirname + '/index2.html');
 })
 
-// app.post('/check',function(요청,응답){
-//   응답.sendFile(__dirname + 'check.html');
-// });
+app.post('/',function(요청,응답){
+  응답.sendFile(__dirname + 'index.html');
+});
+
+app.post('/check',function(요청,응답){
+  응답.sendFile(__dirname + 'index2.html');
+});
 
 // app.post('/check', passport.authenticate('local', {failureRedirect : '/fail'}), function(요청, 응답){
 //   응답.sendFile(__dirname + 'check.html')
