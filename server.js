@@ -28,8 +28,11 @@ app.get('/', function(요청, 응답) {
 app.get('/check', function(요청, 응답) { 
   응답.render('index2.ejs');
 })
+app.get('/checkfail',function(요청,응답){
+  응답.render('index3.ejs');
+})
 
-app.post('/add', passport.authenticate('local', {failureRedirect : '/fail'}), function(요청, 응답){
+app.post('/add', passport.authenticate('local', {failureRedirect : '/checkfail'}), function(요청, 응답){
   응답.render('mypage.ejs')
 });
 
