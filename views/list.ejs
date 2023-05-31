@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,49 +30,19 @@
     left: 50%;
     transform: translate(-50%);
     }
-    button {
-    margin-left: 50%;
-    transform: translate(-50%);
-    margin-top: 200px;
-    font-size: 40px;
-    color: black;
-    font-family: inherit;
-    font-weight: 800;
-    cursor: pointer;
-    position: relative;
-    border: none;
-    background: none;
-    text-transform: uppercase;
-    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-    transition-duration: 400ms;
-    transition-property: color;
-  }
-  
-  button:focus,
-  button:hover {
-    color: black;
-  }
-  
-  button:focus:after,
-  button:hover:after {
-    width: 100%;
-    left: 0%;
-  }
-  
-  button:after {
-    content: "";
-    pointer-events: none;
-    bottom: -2px;
-    left: 50%;
-    position: absolute;
-    width: 0%;
-    height: 2px;
-    background-color: black;
-    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-    transition-duration: 400ms;
-    transition-property: width, left;
-  }
-
+    *{
+       background-color: black;
+    }
+    body{
+        background-color: black;
+    }
+    .post{
+        top: 0;
+        color: white;
+        background-color: black;
+        width: 100%;
+        height: 100vh;
+    }
   </style>
 </head>
 <body>
@@ -78,21 +50,14 @@
   <header>
     <img class="logo" src="images/logo2.png">
 </header>
-<div class="container">
-  <section>
-  <div>
-    <button id="myBtn" onclick="window.location.href='/check'">
-            출석 했으니 공부해야겠지 ?
-            </button>
-  </div>
-<div>
-    <button id="myBtn" onclick="window.location.href='/check'">
-      다시 돌아가기
-      </button>
-</div>
-</section>
-</div>
+<div class="post">
 
+  <% for (var i = 0; i < posts.length; i ++) { %>
+    <h4><%= posts[i].CHECK_CODE %></h4>
+    <p><%= posts[i].STUDENT_CODE %></p>
+  <% } %>
+
+</div>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
