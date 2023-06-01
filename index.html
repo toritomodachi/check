@@ -117,7 +117,7 @@ button {
     margin-top: 100vh;
 }
 body {font-family: Arial, Helvetica, sans-serif;}
-
+.scrollLock { overflow: hidden; }
     </style>
     
     <title>출석체크</title>
@@ -125,21 +125,31 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <body>
     <script>
         
-        $(window).on('scroll', function(){
-            $(window).scrollTop(900)
-                if (window.scrollY > 500) {
+        var prevScroll = pageYOffset;
+        window.addEventListener("scroll", () => prevScroll = pageYOffset);
+        window.addEventListener("click", (e) => {
+        if (pageYOffset !== prevScroll) return;
+        e.preventDefault();
+        $(window).scrollTop(900)
+        
+                 
       $('.logo').css('width', '100px');
       $('.logo').css('height','100px');
       $('header').css('height','100px');
       $('header').css('opacity','0.5');
-    }
-    else{
-        $('.logo').css('width', '900px');
+      const body = document.getElementsByTagName('body')[0];
+    body.classList.add('scrollLock');
+    
+    setTimeout( function(){
+        $(window).scrollTop(0)
+      $('.logo').css('width', '900px');
       $('.logo').css('height','900px');
       $('header').css('height','900px');
       $('header').css('opacity','1');
-    }
-            });
+      body.classList.remove('scrollLock');
+    }, 3000); 
+});
+
     </script>
     <header>
         <a class="scroll-logo" href=""><img class="logo" src="images/logo2.png"></a>

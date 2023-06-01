@@ -34,6 +34,9 @@ app.get('/check', function(요청, 응답) {
 app.get('/checkfail',function(요청,응답){
   응답.render('index3.ejs');
 })
+app.get('/loding',function(요청,응답){
+  응답.render('index4.ejs');
+})
 
 // app.get('/list', function(요청, 응답){
 //   db.collection('sw_student_profile').find().toArray(function(에러, 결과){
@@ -43,7 +46,7 @@ app.get('/checkfail',function(요청,응답){
 // })
 
 app.post('/add', passport.authenticate('local', {failureRedirect : '/checkfail'}), function(요청, 응답){
-  응답.render('mypage.ejs');
+  응답.render('index4.ejs');
 });
 
 passport.use(new LocalStrategy({
