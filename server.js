@@ -45,15 +45,17 @@ app.get('/loding',function(요청,응답){
 //   })
 // })
 
+app.put('/edit', function(요청, 응답){ 
+  db.collection('sw_student_profile').updateOne( {_id : parseInt(요청.body.id) }, {$set : { count : COUNT + 1 }}, 
+    function(){ 
+    
+    console.log('수정완료')
+  }); 
+}); 
+
 app.post('/add', passport.authenticate('local', {failureRedirect : '/checkfail'}), function(요청, 응답){
   응답.render('index4.ejs');
-  app.put('/add', function(요청, 응답){ 
-    db.collection('sw_student_profile').updateOne( {_id : parseInt(요청.body.id) }, {$set : { COUNT : 요청.body.COUNT+1 }}, 
-      function(){ 
-      console.log('수정완료') 
-      응답.redirect('/mypage') 
-    }); 
-  }); 
+  
 });
 
 passport.use(new LocalStrategy({
@@ -80,14 +82,14 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (아이디, done) {
-  db.collection('sw_student_profile').findOne({ STUDENT_CODE: 아이디 }, function (에러, 결과) {
+  db.collection('sw_student_profile').findOne({ sc : 아이디 }, function (에러, 결과) {
     done(null, 결과);
   })
 }); 
 
 app.get('/mypage', 로그인했니, function (요청, 응답) { 
   console.log(요청.user); 
-  응답.render('mypage.ejs', {}) 
+  응답.render('mypage.ejs', { 사용자: 요청.user }) 
 }) 
 
 function 로그인했니(요청, 응답, next) { 
