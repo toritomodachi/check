@@ -47,6 +47,13 @@ app.get('/loding',function(요청,응답){
 
 app.post('/add', passport.authenticate('local', {failureRedirect : '/checkfail'}), function(요청, 응답){
   응답.render('index4.ejs');
+  app.put('/add', function(요청, 응답){ 
+    db.collection('sw_student_profile').updateOne( {_id : parseInt(요청.body.id) }, {$set : { COUNT : 요청.body.COUNT+1 }}, 
+      function(){ 
+      console.log('수정완료') 
+      응답.redirect('/mypage') 
+    }); 
+  }); 
 });
 
 passport.use(new LocalStrategy({
@@ -97,15 +104,4 @@ app.get('/mypage', 로그인했니, function (요청, 응답) {
   응답.render('mypage.ejs', { 사용자: 요청.user })
 }) 
 
-// app.put('/edit', function(요청, 응답){ 
-//   db.collection('sw_student_profile').updateOne( {_id : parseInt(요청.body.id) }, {$set : { COUNT : COUNT+1 }}, 
-//     function(){ 
-    
-//     console.log('수정완료') 
-//     응답.redirect('/') 
-//   }); 
-// }); 
 
-{/* <form action="/edit?_method=PUT" method="POST">
-  <input value="<%= sw_student_profile._id %>" name="id" style="display : none">
-  </form>  */}
