@@ -45,8 +45,8 @@ app.get('/loding',function(요청,응답){
 //   })
 // })
 
-app.put('/edit', function(요청, 응답){ 
-  db.collection('sw_student_profile').updateOne( {_id : parseInt(요청.body.id) }, {$set : { count : COUNT + 1 }}, 
+app.put('/add', function(요청, 응답){ 
+  db.collection('sw_student_profile').updateOne( {_id : parseInt(요청.body.id) }, {$set : { COUNT : parseInt(요청.body.COUNT) + 1 }}, 
     function(){ 
     
     console.log('수정완료')
@@ -100,10 +100,5 @@ function 로그인했니(요청, 응답, next) {
     응답.send('로그인안하셨는데요?') 
   } 
 } 
-
-app.get('/mypage', 로그인했니, function (요청, 응답) {
-  console.log(요청.user);
-  응답.render('mypage.ejs', { 사용자: 요청.user })
-}) 
 
 
