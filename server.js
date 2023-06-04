@@ -38,27 +38,21 @@ app.get('/loding',function(요청,응답){
   응답.render('index4.ejs');
 })
 
-// app.get('/list', function(요청, 응답){
-//   db.collection('sw_student_profile').find().toArray(function(에러, 결과){
-//     console.log(결과)
-//     응답.render('list.ejs', { posts : 결과 })
-//   })
-// })
 
-// app.put('/add', function(요청, 응답){ 
-//   db.collection('sw_student_profile').updateOne( {_id : parseInt(요청.body.id) }, {$set : { COUNT : parseInt(요청.body.COUNT) + 1 }}, 
-//     function(){ 
-    
-//     console.log('수정완료')
-//   }); 
-// }); 
+ app.post('/add', passport.authenticate('local', {failureRedirect : '/checkfail'}),function(요청,응답){ // 혼종 : 오류 띄우는 애 아직 이해 안됨
+  app.put('/add', function(요청, 응답){
+    db.collection('sw_student_profile').find().toArray(function(에러, 결과){
+      console.log(결과)
+      응답.render('index4.ejs', { posts : 결과 })
+         db.collection('sw_student_profile').updateOne( {_id : parseInt(요청.body.id), _id : Boolean(요청.body.check) }, {$set : { COUNT : parseInt(요청.body.COUNT) + 1 , CHECK : Boolean(요청.body.CHECK = true)}}, 
+      function(){ 
+      console.log('수정완료') 
+     }); 
+    })
+  })
+ })
 
-app.post('/add', passport.authenticate('local', {failureRedirect : '/checkfail'}), function(요청, 응답){
-  응답.render('index4.ejs');
-  
-});
-
-passport.use(new LocalStrategy({
+passport.use(new LocalStrategy({ //local 형식으로 아이디, 비번 확인 해주는애
   usernameField: 'sc',
   passwordField: 'cc',
   session: true,
@@ -81,26 +75,13 @@ passport.serializeUser(function (user, done) {
   done(null, user.STUDENT_CODE);
 });
 
-passport.deserializeUser(function (아이디, done) {
-  db.collection('sw_student_profile').findOne({ id : 아이디 }, function (에러, 결과) {
+passport.deserializeUser(function (아이디, done) { //쿠키 만들어 주는 애
+  db.collection('sw_student_profile').findOne({ sc : 아이디 }, function (에러, 결과) {
     done(null, 결과);
   })
 }); 
 
-// app.get('/mypage', 로그인했니, function (요청, 응답) { 
-//   console.log(요청.user); 
-//   응답.render('mypage.ejs', {사용자: 요청.user}) 
-// }) 
-
-// function 로그인했니(요청, 응답, next) { 
-//   if (요청.user) {
-//     next()
-//   } 
-//   else { 
-//     응답.send('로그인안하셨는데요?') 
-//   } 
-// } 
-
 app.get('/mypage', function (요청, 응답) {
-  응답.render('mypage.ejs', {})
+  console.log(요청.NAME);
+  응답.render('mypage.ejs', {NAME: 요청.NAME})
 }) 
