@@ -12,10 +12,12 @@ app.use(passport.session());
 app.set('view engine', 'ejs');
 app.use(express.static('views'));
 var db;
+var data;
 
 MongoClient.connect('mongodb+srv://duram4814:aYj6kDFz9kKh8YbS@onelife.4mdp0pa.mongodb.net/?retryWrites=true&w=majority', { useUnifiedTopology: true }, function (에러, client) {
 	if (에러) return console.log(에러)
 	db = client.db('bdar_sw_db');
+  data = db.collection('sw_student_profile').find().toArray()
 
 	app.listen(7777, function () {
 		console.log('listening on 7777');
@@ -40,17 +42,18 @@ app.get('/loding',function(요청,응답){
 
 
  app.post('/add', passport.authenticate('local', {failureRedirect : '/checkfail'}),function(요청,응답){ // 혼종 : 오류 띄우는 애 아직 이해 안됨
+  응답.render('index4.ejs')
   app.put('/add', function(요청, 응답){
-    db.collection('sw_student_profile').find().toArray(function(에러, 결과){
-      console.log(결과)
-      응답.render('index4.ejs', { posts : 결과 })
-         db.collection('sw_student_profile').updateOne( {_id : parseInt(요청.body.id), _id : Boolean(요청.body.check) }, {$set : { COUNT : parseInt(요청.body.COUNT) + 1 , CHECK : Boolean(요청.body.CHECK = true)}}, 
-      function(){ 
-      console.log('수정완료') 
+    
+      //console.log(결과)
+      응답.render({ posts : data })
+         db.collection('sw_student_profile').updateOne( {_id : parseInt(요청.body.id), _id : Boolean(요청.body.check), _id : parseInt(요청.body.count)}, {$set : { COUNT : parseInt(요청.body.count) + 1 , CHECK : Boolean(요청.body.check = true)}}, 
+      function(){
+      console.log('수정완료')
      }); 
     })
   })
- })
+ 
 
 passport.use(new LocalStrategy({ //local 형식으로 아이디, 비번 확인 해주는애
   usernameField: 'sc',
@@ -58,7 +61,7 @@ passport.use(new LocalStrategy({ //local 형식으로 아이디, 비번 확인 �
   session: true,
   passReqToCallback: false,
 }, function (입력한학번, 입력한출석코드, done) {
-  console.log(입력한학번, 입력한출석코드);
+  //console.log(입력한학번, 입력한출석코드);
   db.collection('sw_student_profile').findOne({ STUDENT_CODE : 입력한학번 }, function (에러, 결과) {
     if (에러) return done(에러);
 
@@ -82,6 +85,9 @@ passport.deserializeUser(function (아이디, done) { //쿠키 만들어 주는 
 }); 
 
 app.get('/mypage', function (요청, 응답) {
-  console.log(요청.NAME);
-  응답.render('mypage.ejs', {NAME: 요청.NAME})
-}) 
+  console.log(요청.data.NAME);
+  응답.render('mypage.ejs', {NAME: 요청.data.NAME})
+  응답.render('', { posts : data })
+  
+})
+ 
