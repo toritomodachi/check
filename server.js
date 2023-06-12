@@ -12,12 +12,12 @@ app.use(passport.session());
 app.set('view engine', 'ejs');
 app.use(express.static('views'));
 var db;
-var data;
+// var data;
 
 MongoClient.connect('mongodb+srv://duram4814:aYj6kDFz9kKh8YbS@onelife.4mdp0pa.mongodb.net/?retryWrites=true&w=majority', { useUnifiedTopology: true }, function (에러, client) {
 	if (에러) return console.log(에러)
 	db = client.db('bdar_sw_db');
-  data = db.collection('sw_student_profile').find().toArray()
+  // data = 
 
 	app.listen(7777, function () {
 		console.log('listening on 7777');
@@ -36,23 +36,20 @@ app.get('/check', function(요청, 응답) {
 app.get('/checkfail',function(요청,응답){
   응답.render('index3.ejs');
 })
-app.get('/loding',function(요청,응답){
+app.get('/loading',function(요청,응답){
   응답.render('index4.ejs');
 })
 
 
  app.post('/add', passport.authenticate('local', {failureRedirect : '/checkfail'}),function(요청,응답){ // 혼종 : 오류 띄우는 애 아직 이해 안됨
   응답.render('index4.ejs')
-  app.put('/add', function(요청, 응답){
-    
-      //console.log(결과)
-      응답.render({ posts : data })
-         db.collection('sw_student_profile').updateOne( {_id : parseInt(요청.body.id), _id : Boolean(요청.body.check), _id : parseInt(요청.body.count)}, {$set : { COUNT : parseInt(요청.body.count) + 1 , CHECK : Boolean(요청.body.check = true)}}, 
-      function(){
-      console.log('수정완료')
-     }); 
-    })
   })
+  app.put('/add', function(요청, 응답){
+    db.collection('sw_student_profile').updateOne( {_id : ObjectId(요청.body.id)}, {$set : { COUNT : parseInt(요청.body.count) + 1 , CHECK : Boolean(요청.body.check = true)}}, 
+ function(){
+ console.log('수정완료')
+}); 
+})
  
 
 passport.use(new LocalStrategy({ //local 형식으로 아이디, 비번 확인 해주는애
@@ -85,9 +82,9 @@ passport.deserializeUser(function (아이디, done) { //쿠키 만들어 주는 
 }); 
 
 app.get('/mypage', function (요청, 응답) {
-  console.log(요청.data.NAME);
-  응답.render('mypage.ejs', {NAME: 요청.data.NAME})
-  응답.render('', { posts : data })
-  
+  db.collection('sw_student_profile').find().toArray(function(에러,결과){
+    응답.render('mypage.ejs', {posts: 결과})  
+    console.log(결과)
+  })
 })
  

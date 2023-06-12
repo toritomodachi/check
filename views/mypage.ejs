@@ -87,7 +87,24 @@
 <div class="container">
   <section>
   <div>
-    <p><%= posts.NAME %> 야 출석했으니 자리에 앉아서 공부나 해 필요한 거 있으면 말하고</p>
+    <% for(var i = 0; i < posts.length;i++){ %>
+      <% if(posts[i].STUDENT_CODE == 30607){%>
+        <% break; %>
+        <% } %>
+        <% if(posts[i].STUDENT_CODE == 30606){%>
+          <% break; %>
+          <% } %>
+          <% if(posts[i].STUDENT_CODE == 20605){%>
+            <% break; %>
+            <% } %>
+            <% if(posts[i].STUDENT_CODE == 20609){%>
+              <% break; %>
+              <% } %>
+              <% if(posts[i].STUDENT_CODE == 20606){%>
+                <% break; %>
+                <% } %>
+    <% } %>
+    <p><%= posts[i].NAME %> 출석했으니 자리에 앉아서 공부나 해 필요한 거 있으면 말하고</p>
   </div>
 </section>
 </div>
@@ -97,3 +114,4 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
+<!-- 이원희 박서진 김현민 이태영 이채민 -->
