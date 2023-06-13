@@ -87,24 +87,22 @@
 <div class="container">
   <section>
   <div>
-    <% for(var i = 0; i < posts.length;i++){ %>
-      <% if(posts[i].STUDENT_CODE == 30607){%>
-        <% break; %>
+      <% if(STUDENT_CODE == 30607){%>
+        <p><%= STUDENT_CODE.NAME %> 출석했으니 자리에 앉아서 공부나 해 필요한 거 있으면 말하고</p>
         <% } %>
-        <% if(posts[i].STUDENT_CODE == 30606){%>
-          <% break; %>
+        <% if(STUDENT_CODE == 30606){%>
+          <p><%= STUDENT_CODE.NAME %> 출석했으니 자리에 앉아서 공부나 해 필요한 거 있으면 말하고</p>
           <% } %>
-          <% if(posts[i].STUDENT_CODE == 20605){%>
-            <% break; %>
+          <% if(STUDENT_CODE == 20605){%>
+            <p><%= STUDENT_CODE.NAME %> 출석했으니 자리에 앉아서 공부나 해 필요한 거 있으면 말하고</p>
             <% } %>
-            <% if(posts[i].STUDENT_CODE == 20609){%>
-              <% break; %>
+            <% if(STUDENT_CODE == 20609){%>
+              <p><%= STUDENT_CODE.NAME %> 출석했으니 자리에 앉아서 공부나 해 필요한 거 있으면 말하고</p>
               <% } %>
-              <% if(posts[i].STUDENT_CODE == 20606){%>
-                <% break; %>
+              <% if(STUDENT_CODE == 20606){%>
+                <p><%= STUDENT_CODE.NAME %> 출석했으니 자리에 앉아서 공부나 해 필요한 거 있으면 말하고</p>
                 <% } %>
-    <% } %>
-    <p><%= posts[i].NAME %> 출석했으니 자리에 앉아서 공부나 해 필요한 거 있으면 말하고</p>
+    
   </div>
 </section>
 </div>

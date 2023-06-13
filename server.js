@@ -81,10 +81,10 @@ passport.deserializeUser(function (아이디, done) { //쿠키 만들어 주는 
   })
 }); 
 
-app.get('/mypage', function (요청, 응답) {
-  db.collection('sw_student_profile').find().toArray(function(에러,결과){
-    응답.render('mypage.ejs', {posts: 결과})  
-    console.log(결과)
+app.get('/mypage', function (요청, 응답,학번,이름) {
+  db.collection('sw_student_profile').findOne({STUDENT_CODE : 학번},function(에러,학번결과){
+    db.collection('sw_student_profile').findOne({NAME : 이름},function(에러,이름결과){
+      응답.render('mypage.ejs', {NAME : 이름결과},{STUDENT_CODE : 학번결과})
   })
 })
- 
+})
