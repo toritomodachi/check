@@ -17,7 +17,6 @@ var db;
 MongoClient.connect('mongodb+srv://duram4814:aYj6kDFz9kKh8YbS@onelife.4mdp0pa.mongodb.net/?retryWrites=true&w=majority', { useUnifiedTopology: true }, function (에러, client) {
 	if (에러) return console.log(에러)
 	db = client.db('bdar_sw_db');
-  // data = 
 
 	app.listen(7777, function () {
 		console.log('listening on 7777');
@@ -82,8 +81,8 @@ passport.deserializeUser(function (아이디, done) { //쿠키 만들어 주는 
 }); 
 
 app.get('/mypage', function (요청, 응답,학번,이름) {
-  db.collection('sw_student_profile').findOne({STUDENT_CODE : 학번},function(에러,학번결과){
-    db.collection('sw_student_profile').findOne({NAME : 이름},function(에러,이름결과){
+  db.collection('sw_student_profile').find({STUDENT_CODE : 학번},function(에러,학번결과){
+    db.collection('sw_student_profile').find({NAME : 이름},function(에러,이름결과){
       응답.render('mypage.ejs', {NAME : 이름결과},{STUDENT_CODE : 학번결과})
   })
 })
